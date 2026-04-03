@@ -6,29 +6,28 @@ void numeros (){
     
     cout<<"Ingrese A: ";
     cin>>a;
+    
     cout<<"Ingrese B: ";
     cin>>b;
+    
     cout<<"Ingrese C: ";
     cin>>c;
     
-    if ((a>=b && a<=c) || (a<=b && a>=c)){
+    
+    if (a==b && b==c){
+        cout<<"Todos los numeros son iguales";
+    }
+    else if ((a>=b && a<=c) || (a<=b && a>=c)){
         cout<<"A es el numero medio";
-        
     }
     else if
         ((b>=a && b<=c) || (b<=a && b>=c)){
             cout<<"B es el numero medio";
-            
         }
     else if
         ((c>=a && c<=b) || (c<=a && c>=b)){
             cout<<"C es el numero medio";
-            
         }
-    else if
-    (a==b && b==c){
-        cout<<"Todos los numeros son iguales";
-    }
 }
 
 int main (){
