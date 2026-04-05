@@ -30,3 +30,40 @@ public class NumeroMedio{
         }
 }
 }
+
+////////////
+
+import java.util.*;
+
+public class NumeroMedio{
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+        int prom=0, nivel=0, matricula=1200;
+        float beca=0;
+    
+        System.out.print("Ingrese promedio: ");
+        prom=teclado.nextInt();
+    
+        System.out.print("Ingrese nivel: ");
+        nivel=teclado.nextInt();
+    
+        if(prom>=90 && nivel==1){
+            beca=matricula*0.80f;
+        }
+        else if(prom>=90 && nivel==2){
+            beca=matricula*0.60f;
+        }
+        else if(prom>=80 && nivel==1){
+            beca=matricula*0.50f;
+        }
+        else if(prom>=80 && nivel==2){
+            beca=matricula*0.30f;
+        }
+        else{
+            System.out.println("No hay beca");
+            return;
+        }
+    
+        System.out.println("Pago matricula: " + beca + " Bs");
+    }
+}
