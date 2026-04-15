@@ -1,0 +1,43 @@
+C++
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+//Formula para mantener el orden
+//E=0
+//nuevoNumero=nuevoNumero + digito * 10  elevado Exponente
+//pow 10 elevado E      =  pow(10,e)
+//E=E+1
+// int& es parametro por referencia (para llamar a la funcion)
+
+void EliminarDigito (int& numero, int digito){
+    int nuevoNumero=0, e=0, d=0;
+    while (n>0){
+    d=numero%10;
+    numero=numero/10;
+    
+    if (d!=dig){
+        nuevoNumero=nuevoNumero+d * pow(10,e);
+        e++;
+    }
+    cout<<"Digito= "<<d<<" Numero= "<<n<<" Nuevo Numero= "<<nuevoNumero<< endl;
+    }
+    numero=nuevoNumero;
+}
+
+//Formula para invertit el numero
+// nuevoNumero=nuevoNumero*10+digito
+void invertirNumero (int& n){
+    int nuevoNumero=0, digito=0;
+    while (n>0){
+       d=n%10;
+       numero=numero/10;
+       nuevoNumero=nuevoNumero*10+digito;
+    }
+}
+
+
+int main(){
+    
+}
