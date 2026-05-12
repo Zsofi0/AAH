@@ -1,229 +1,996 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
+// 11 de mayo del 2026 antes del examen :)
 
-int digitoMasRepetido(int n){
-    int frecuencia[10]={0};
-
+int digMay (int n){
+    int na=n, d=0,dm=na%10;
+    while(na>0){
+        d=na %10;
+        na=na/10;
+        if(d>dm)dm=d;
+    }
+    return dm;
+} 
+//cambiar un numero bloque por otro dentro de otro numero
+// n= 213452 n1= 34 y n2=10 => n= 211052
+// ojo => nd 
+int cantDig(int n){
+    int c=0,na=n; 
+    while(na>0){
+        na=na/10;
+        c++;
+    }
+    return c;
+}     
+     
+void reemplazarNumero(int& n,int n1,int n2){
+    int nn=0,e=0,d=0,nd=cantDig(n1);
     while(n>0){
-        int digito=n%10;
-        frecuencia[digito]++;
-        n=n/10;
+        d=n%(int)pow(10,nd);
+        n=n/(int)pow(10,nd);
+        if(d==n1)
+           nn= nn + n2 *(int)pow(10,e);
+        else
+           nn= nn + d *(int)pow(10,e);
+        e+=nd;
     }
-
-    int mayor=0;
-    int digito=0;
-
-    for(int i=0; i<=9;i++){
-        if(frecuencia[i]>mayor){
-            mayor =frecuencia[i];
-            digito=i;
+    n=nn;
+}     
+   
+  //intercalar primos ASC y no primos DESC
+  //n=2369871 =>2938761
+  void ordenarAsc(int& n){
+      int nn=0,d=0,na=n;
+      for(int i=1;i<10;i++){
+         n=na;
+         while(n>0){
+             d=n%10;
+             n=n/10;
+             if(d==i)nn=nn*10+d;
+         }
+      }
+      n=nn;
+  }
+  
+   void ordenarDes(int& n){
+      int nn=0,d=0,na=n;
+      for(int i=9;i>=0;i--){
+         n=na;
+         while(n>0){
+             d=n%10;
+             n=n/10;
+             if(d==i)nn=nn*10+d;
+         }
+      }
+      n=nn;
+  }
+  
+  void invertir(int& n){
+     int nn=0,d=0;
+      while(n>0){
+            d=n%10;
+            n=n/10;
+            nn=nn*10+d;
+         }
+        n=nn; 
+  }
+  //  //n=2369871 =>2938761
+  // nAsc=1236789. no primos
+  // nDesc=9876321. primos. (2,3,5,7)
+  // nn=293
+  void intercalarPriAscNoPriDesc(int& n){
+      int nn=0,d=0,nAsc,nDes;
+      bool encontre=false;
+      ordenarAsc(n);
+      nAsc=n;
+      invertir(n);
+      nDes=n;
+      while(nAsc>0 or nDes>0){
+          encontre=false;
+          while(nDes>0 and encontre==false){
+              d=nDes%10;
+              nDes=nDes/10;
+              if(d==2 or d==3 or d==5 or d==7){
+                  nn=nn*10+d;
+                  encontre=true;
+              }
+          }
+          encontre=false;
+           while(nAsc>0 and encontre==false){
+              d=nAsc%10;
+              nAsc=nAsc/10;
+              if(d!=2 and d!=3 and d!=5 and d!=7){
+                  nn=nn*10+d;
+                  encontre=true;
+              }
+          }
+      }
+      n=nn;
+      
+  }
+   
+    //convertir numero de base 10 a base 2
+    
+    void convertirDecimalBinario(int& n){
+        int nn=0,d=0,e=0;
+        while(n>0){
+            d=n%2;
+            n=n/2;
+            nn=nn+d*(int)pow(10,e);
+            e++;
         }
+        n=nn;
     }
-
-    return digito;
-}
-
-int main(){
+    
+    
+    bool esFibo(int n){
+        int a=-1,b=1,f=0;
+        while(f<=n){
+            f=a+b;
+            a=b;
+            b=f;
+            if(n==f) return true;
+        }
+        return false;
+    }
+    
+                    
+int main() {
     int n;
-
-    cout<<"Ingresar numero: ";
+    cout<<"Ingresar n: ";
     cin>>n;
-
-    cout<<"Digito mas repetido: "
-        <<digitoMasRepetido(n);
-
+    cout<<"es fibo: "<<esFibo(n);
+    
+    //cout<<"Digito mayor: "<<digMay(n);
+   // cout<<" n= "<<n;
+  
+  
     return 0;
 }
-
-
-1) Encontrar el 2do dígito primo del número
+1. Último dígito
 #include <iostream>
 using namespace std;
 
-bool esPrimo(int n){
-    if(n < 2) return false;
-
-    for(int i = 2; i < n; i++){
-        if(n % i == 0) return false;
-    }
-
-    return true;
-}
-
-int segundoDigitoPrimo(int n){
-    int copia = n, invertido = 0;
-
-    while(copia > 0){
-        invertido = invertido * 10 + copia % 10;
-        copia /= 10;
-    }
-
-    int cont = 0;
-
-    while(invertido > 0){
-        int dig = invertido % 10;
-
-        if(esPrimo(dig)){
-            cont++;
-
-            if(cont == 2){
-                return dig;
-            }
-        }
-
-        invertido /= 10;
-    }
-
-    return -1;
+int ultimoDigito(int n){
+    return n % 10;
 }
 
 int main(){
     int numero;
-
     cout<<"Ingresar numero: ";
     cin>>numero;
 
-    cout<<"2do digito primo: "
-        <<segundoDigitoPrimo(numero);
+    cout<<"Ultimo digito: "<<ultimoDigito(numero);
+
+    return 0;
+}
+________________________________________
+🔹 2. Primer dígito
+#include <iostream>
+using namespace std;
+
+int primerDigito(int n){
+    int numeroCopia = n;
+    while(numeroCopia >= 10){
+        numeroCopia = numeroCopia / 10;
+    }
+    return numeroCopia;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Primer digito: "<<primerDigito(numero);
+
+    return 0;
+}
+________________________________________
+🔹 3. Primero y último dígito
+#include <iostream>
+using namespace std;
+
+int primerDigito(int n){
+    int numeroCopia = n;
+    while(numeroCopia >= 10){
+        numeroCopia = numeroCopia / 10;
+    }
+    return numeroCopia;
+}
+
+int ultimoDigito(int n){
+    return n % 10;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Primer digito: "<<primerDigito(numero)<<endl;
+    cout<<"Ultimo digito: "<<ultimoDigito(numero);
+
+    return 0;
+}
+________________________________________
+🔹 4. Cantidad de dígitos
+#include <iostream>
+using namespace std;
+
+int cantDigs(int n){
+   int numeroCopia = n, contador = 0;
+   while(numeroCopia > 0){
+      numeroCopia = numeroCopia / 10;
+      contador++;
+   }
+   return contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Cantidad de digitos: "<<cantDigs(numero);
+
+    return 0;
+}
+________________________________________
+🔹 5. Suma de dígitos
+#include <iostream>
+using namespace std;
+
+int sumaDigitos(int n){
+    int numeroCopia = n, suma = 0, digito = 0;
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        suma += digito;
+        numeroCopia = numeroCopia / 10;
+    }
+    return suma;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Suma de digitos: "<<sumaDigitos(numero);
+
+    return 0;
+}
+________________________________________
+🔹 6. Cantidad de dígitos pares
+#include <iostream>
+using namespace std;
+
+int cantDigsPares(int n){
+   int numeroCopia = n, contador = 0, digito = 0;
+   while(numeroCopia > 0){
+      digito = numeroCopia % 10; 
+      numeroCopia = numeroCopia / 10;
+      if(digito % 2 == 0) contador++;
+   }
+   return contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Cantidad de digitos pares: "<<cantDigsPares(numero);
 
     return 0;
 }
 
-3) Segmentar en no primos y primos descendente
 #include <iostream>
 using namespace std;
 
-bool esPrimo(int n){
-    if(n < 2) return false;
+bool existeDigImpar(int n){
+    int numeroCopia = n, digito = 0;
+    bool existe = false;
 
-    for(int i = 2; i < n; i++){
-        if(n % i == 0) return false;
-    }
+    while(numeroCopia > 0 && existe == false){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
 
-    return true;
-}
-
-int ordenarDesc(int n){
-    int resultado = 0;
-
-    for(int i = 9; i >= 0; i--){
-        int copia = n;
-
-        while(copia > 0){
-            int dig = copia % 10;
-
-            if(dig == i){
-                resultado = resultado * 10 + dig;
-            }
-
-            copia /= 10;
+        if(digito % 2 == 1){
+            existe = true;
         }
     }
+    return existe;
+}
 
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    if(existeDigImpar(numero))
+        cout<<"Existe digito impar";
+    else
+        cout<<"No existe";
+
+    return 0;
+}
+________________________________________
+🔹 9. ¿Existe algún dígito par?
+#include <iostream>
+using namespace std;
+
+bool existeDigPar(int n){
+    int numeroCopia = n, digito = 0;
+    bool existe = false;
+
+    while(numeroCopia > 0 && existe == false){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0){
+            existe = true;
+        }
+    }
+    return existe;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    if(existeDigPar(numero))
+        cout<<"Existe digito par";
+    else
+        cout<<"No existe";
+
+    return 0;
+}
+________________________________________
+🔹 10. Dígito mayor
+#include <iostream>
+using namespace std;
+
+int digitoMayor(int n){
+    int numeroCopia = n, digito = 0, mayor = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito > mayor){
+            mayor = digito;
+        }
+    }
+    return mayor;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Digito mayor: "<<digitoMayor(numero);
+
+    return 0;
+}
+________________________________________
+🔹 11. Dígito menor
+#include <iostream>
+using namespace std;
+
+int digitoMenor(int n){
+    int numeroCopia = n, digito = 0, menor = 9;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito < menor){
+            menor = digito;
+        }
+    }
+    return menor;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Digito menor: "<<digitoMenor(numero);
+
+    return 0;
+}
+________________________________________
+🔹 12. Promedio de dígitos
+#include <iostream>
+using namespace std;
+
+float promedioDigitos(int n){
+    int numeroCopia = n, digito = 0, suma = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        suma += digito;
+        contador++;
+        numeroCopia = numeroCopia / 10;
+    }
+
+    return (float)suma / contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Promedio: "<<promedioDigitos(numero);
+
+    return 0;
+}
+________________________________________
+🔹 13. Contar múltiplos de 4
+#include <iostream>
+using namespace std;
+
+int cantMultiplos4(int n){
+    int numeroCopia = n, digito = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 4 == 0){
+            contador++;
+        }
+    }
+    return contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Cantidad multiplos de 4: "<<cantMultiplos4(numero);
+
+    return 0;
+}
+________________________________________
+🔹 14. Dígitos pares divisibles entre 4
+#include <iostream>
+using namespace std;
+
+int cantParesDiv4(int n){
+    int numeroCopia = n, digito = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0 && digito % 4 == 0){
+            contador++;
+        }
+    }
+    return contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Cantidad pares divisibles entre 4: "<<cantParesDiv4(numero);
+
+    return 0;
+}
+________________________________________
+🔹 15. Primer dígito par
+#include <iostream>
+using namespace std;
+
+int primerDigPar(int n){
+    int numeroCopia = n, digito = 0, resultado = -1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0){
+            resultado = digito;
+        }
+    }
     return resultado;
 }
 
-int segmentar(int n){
-    int primos = 0;
-    int noPrimos = 0;
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
 
-    while(n > 0){
-        int dig = n % 10;
+    cout<<"Primer digito par: "<<primerDigPar(numero);
 
-        if(esPrimo(dig)){
-            primos = primos * 10 + dig;
+    return 0;
+}
+________________________________________
+🔹 16. Promedio múltiplos de 3
+#include <iostream>
+using namespace std;
+
+float promedioMult3(int n){
+    int numeroCopia = n, digito = 0, suma = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 3 == 0){
+            suma += digito;
+            contador++;
+        }
+    }
+
+    if(contador == 0) return 0;
+    return (float)suma / contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Promedio multiplos de 3: "<<promedioMult3(numero);
+
+    return 0;
+}
+________________________________________
+🔹 17. Promedio de dígitos pares
+#include <iostream>
+using namespace std;
+
+float promedioPares(int n){
+    int numeroCopia = n, digito = 0, suma = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0){
+            suma += digito;
+            contador++;
+        }
+    }
+
+    if(contador == 0) return 0;
+    return (float)suma / contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Promedio pares: "<<promedioPares(numero);
+
+    return 0;
+}
+
+
+
+________________________________________
+🔹 7. Cantidad de dígitos impares
+#include <iostream>
+using namespace std;
+
+int cantDigsImpares(int n){
+   int numeroCopia = n, contador = 0, digito = 0;
+   while(numeroCopia > 0){
+      digito = numeroCopia % 10; 
+      numeroCopia = numeroCopia / 10;
+      if(digito % 2 == 1) contador++;
+   }
+   return contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Cantidad de digitos impares: "<<cantDigsImpares(numero);
+
+    return 0;
+}
+🔹 18. Promedio dígitos primos
+#include <iostream>
+using namespace std;
+
+bool esPrimo(int d){
+    return (d==2 || d==3 || d==5 || d==7);
+}
+
+float promedioPrimos(int n){
+    int numeroCopia = n, digito = 0, suma = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(esPrimo(digito)){
+            suma += digito;
+            contador++;
+        }
+    }
+
+    if(contador == 0) return 0;
+    return (float)suma / contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Promedio primos: "<<promedioPrimos(numero);
+
+    return 0;
+}
+________________________________________
+🔹 19. Menor entre múltiplos de 2
+#include <iostream>
+using namespace std;
+
+int menorPar(int n){
+    int numeroCopia = n, digito = 0, menor = 10;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0 && digito < menor){
+            menor = digito;
+        }
+    }
+    return menor;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Menor par: "<<menorPar(numero);
+
+    return 0;
+}
+________________________________________
+🔹 20. Promedio dígitos entre 4 y 9
+#include <iostream>
+using namespace std;
+
+float prom4a9(int n){
+    int numeroCopia = n, digito = 0, suma = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito >= 4 && digito <= 9){
+            suma += digito;
+            contador++;
+        }
+    }
+
+    if(contador == 0) return 0;
+    return (float)suma / contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Promedio 4 a 9: "<<prom4a9(numero);
+
+    return 0;
+}
+________________________________________
+🔹 21. Promedio dígitos menores a 7
+#include <iostream>
+using namespace std;
+
+float promMenor7(int n){
+    int numeroCopia = n, digito = 0, suma = 0, contador = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito < 7){
+            suma += digito;
+            contador++;
+        }
+    }
+
+    if(contador == 0) return 0;
+    return (float)suma / contador;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Promedio menores a 7: "<<promMenor7(numero);
+
+    return 0;
+}
+________________________________________
+🔹 22. Sumar pares e impares
+#include <iostream>
+using namespace std;
+
+void sumaParImpar(int n){
+    int numeroCopia = n, digito = 0;
+    int sumaPar = 0, sumaImpar = 0;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0)
+            sumaPar += digito;
+        else
+            sumaImpar += digito;
+    }
+
+    cout<<"Pares: "<<sumaPar<<endl;
+    cout<<"Impares: "<<sumaImpar<<endl;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    sumaParImpar(numero);
+
+    return 0;
+}
+________________________________________
+🔹 23. Nuevo número con pares
+#include <iostream>
+using namespace std;
+
+int formarPares(int n){
+    int numeroCopia = n, digito = 0, resultado = 0, factor = 1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0){
+            resultado = digito * factor + resultado;
+            factor *= 10;
+        }
+    }
+    return resultado;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Numero pares: "<<formarPares(numero);
+
+    return 0;
+}
+________________________________________
+🔹 24. Nuevo número con impares
+#include <iostream>
+using namespace std;
+
+int formarImpares(int n){
+    int numeroCopia = n, digito = 0, resultado = 0, factor = 1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 1){
+            resultado = digito * factor + resultado;
+            factor *= 10;
+        }
+    }
+    return resultado;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Numero impares: "<<formarImpares(numero);
+
+    return 0;
+}
+🔹 25. Dígitos mayores que 5
+#include <iostream>
+using namespace std;
+
+int mayores5(int n){
+    int numeroCopia = n, digito = 0, resultado = 0, factor = 1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito > 5){
+            resultado = digito * factor + resultado;
+            factor *= 10;
+        }
+    }
+    return resultado;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Mayores que 5: "<<mayores5(numero);
+
+    return 0;
+}
+________________________________________
+🔹 26. Pares e impares como dos números
+#include <iostream>
+using namespace std;
+
+void paresImpares(int n){
+    int numeroCopia = n, digito = 0;
+    int pares = 0, impares = 0;
+    int f1 = 1, f2 = 1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0){
+            pares = digito * f1 + pares;
+            f1 *= 10;
         }else{
-            noPrimos = noPrimos * 10 + dig;
+            impares = digito * f2 + impares;
+            f2 *= 10;
         }
-
-        n /= 10;
     }
 
-    primos = ordenarDesc(primos);
-    noPrimos = ordenarDesc(noPrimos);
-
-    int resultado = noPrimos;
-
-    int copia = primos;
-    while(copia > 0){
-        resultado *= 10;
-        copia /= 10;
-    }
-
-    resultado += primos;
-
-    return resultado;
+    cout<<"Pares: "<<pares<<endl;
+    cout<<"Impares: "<<impares<<endl;
 }
 
 int main(){
     int numero;
-
     cout<<"Ingresar numero: ";
     cin>>numero;
 
-    cout<<"Resultado: "
-        <<segmentar(numero);
+    paresImpares(numero);
 
     return 0;
 }
-
-
-
-5. Intercalar mayor y menor
+________________________________________
+🔹 27. Invertir número
 #include <iostream>
 using namespace std;
 
-int ordenarAsc(int n){
-    int r = 0;
+int invertir(int n){
+    int numeroCopia = n, digito = 0, inv = 0;
 
-    for(int i = 0; i <= 9; i++){
-        int copia = n;
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
 
-        while(copia > 0){
-            int dig = copia % 10;
-
-            if(dig == i){
-                r = r * 10 + dig;
-            }
-
-            copia /= 10;
-        }
+        inv = inv * 10 + digito;
     }
-
-    return r;
-}
-
-int ordenarDesc(int n){
-    int r = 0;
-
-    for(int i = 9; i >= 0; i--){
-        int copia = n;
-
-        while(copia > 0){
-            int dig = copia % 10;
-
-            if(dig == i){
-                r = r * 10 + dig;
-            }
-
-            copia /= 10;
-        }
-    }
-
-    return r;
+    return inv;
 }
 
 int main(){
     int numero;
-
     cout<<"Ingresar numero: ";
     cin>>numero;
 
-    int mayor = ordenarDesc(numero);
-    int menor = ordenarAsc(numero);
+    cout<<"Invertido: "<<invertir(numero);
 
-    cout<<"Mayor: "<<mayor<<endl;
-    cout<<"Menor: "<<menor<<endl;
+    return 0;
+}
+________________________________________
+🔹 28. Número capicúa
+#include <iostream>
+using namespace std;
+
+int invertir(int n){
+    int nc=n, inv=0, d;
+    while(nc>0){
+        d=nc%10;
+        nc=nc/10;
+        inv=inv*10+d;
+    }
+    return inv;
+}
+
+bool esCapicua(int n){
+    return n == invertir(n);
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    if(esCapicua(numero))
+        cout<<"Es capicua";
+    else
+        cout<<"No es capicua";
+
+    return 0;
+}
+________________________________________
+🔹 29. Eliminar primer dígito
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int eliminarPrimero(int n){
+    int numeroCopia = n, pot = 1;
+
+    while(numeroCopia >= 10){
+        numeroCopia = numeroCopia / 10;
+        pot *= 10;
+    }
+
+    return n % pot;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Sin primer digito: "<<eliminarPrimero(numero);
+
+    return 0;
+}
+________________________________________
+🔹 30. Eliminar primero y último dígito
+#include <iostream>
+using namespace std;
+
+int eliminarPrimeroUltimo(int n){
+    int nc = n;
+
+    int ultimo = nc % 10;
+    int pot = 1;
+
+    while(nc >= 10){
+        nc = nc / 10;
+        pot *= 10;
+    }
+
+    int sinPrimero = n % pot;
+    return sinPrimero / 10;
+}
+
+int main(){
+    int numero;
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    cout<<"Sin primero y ultimo: "<<eliminarPrimeroUltimo(numero);
 
     return 0;
 }
