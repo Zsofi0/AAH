@@ -5,6 +5,77 @@ using namespace std;
 #include <iostream>
 using namespace std;
 
+int formarPares(int n){
+    int numeroCopia = n, digito = 0, resultado = 0, factor = 1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 0){
+            resultado = digito * factor + resultado;
+            factor *= 10;
+        }
+    }
+    return resultado;
+}
+
+int formarImpares(int n){
+    int numeroCopia = n, digito = 0, resultado = 0, factor = 1;
+
+    while(numeroCopia > 0){
+        digito = numeroCopia % 10;
+        numeroCopia = numeroCopia / 10;
+
+        if(digito % 2 == 1){
+            resultado = digito * factor + resultado;
+            factor *= 10;
+        }
+    }
+    return resultado;
+}
+
+int intercalarParesImpares(int pares, int impares){
+    int resultado = 0, factor = 1;
+
+    while(pares > 0 || impares > 0){
+
+        if(pares > 0){
+            resultado = resultado + (pares % 10) * factor;
+            pares /= 10;
+            factor *= 10;
+        }
+
+        if(impares > 0){
+            resultado = resultado + (impares % 10) * factor;
+            impares /= 10;
+            factor *= 10;
+        }
+    }
+
+    return resultado;
+}
+
+int main(){
+    int numero;
+
+    cout<<"Ingresar numero: ";
+    cin>>numero;
+
+    int pares = formarPares(numero);
+    int impares = formarImpares(numero);
+
+    cout<<"Numero pares: "<<pares<<endl;
+    cout<<"Numero impares: "<<impares<<endl;
+
+    cout<<"Intercalado: "
+        <<intercalarParesImpares(pares, impares);
+
+    return 0;
+}
+#include <iostream>
+using namespace std;
+
 int frecuencia(int n, int digito){
 
 int numeroCopia = n;
