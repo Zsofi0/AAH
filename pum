@@ -2,6 +2,60 @@
 #include <cmath>
 using namespace std;
 
+#include <iostream>
+using namespace std;
+
+int frecuencia(int n, int digito){
+
+int numeroCopia = n;
+int contador = 0;
+
+while(numeroCopia > 0){
+
+int d = numeroCopia % 10;
+
+if(d == digito)
+contador++;
+
+numeroCopia = numeroCopia / 10;
+}
+
+return contador;
+}
+
+int segmentar(int n){
+
+int numeroCopia = n;
+
+int repetidos = 0;
+int unicos = 0;
+
+while(numeroCopia > 0){
+
+int digito = numeroCopia % 10;
+
+if(frecuencia(n, digito) > 1)
+repetidos = repetidos * 10 + digito;
+else
+unicos = unicos * 10 + digito;
+
+numeroCopia = numeroCopia / 10;
+}
+
+return repetidos * 100 + unicos;
+}
+
+int main(){
+
+int numero;
+
+cout<<"Ingresar numero: ";
+cin>>numero;
+
+cout<<"Resultado: "<<segmentar(numero);
+
+return 0;
+}
 // -------------------- FUNCIONES --------------------
 
 // verificar si un digito es primo
