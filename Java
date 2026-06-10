@@ -1,190 +1,123 @@
-package javaapplication277; public class JavaApplication277 {
-public static void main(String[] args) { System.out.println(iguales5(6,6,6,6,7));
-//Pares }
-public static boolean par(int a){ return a%2== 0;
-}
-// imPares
-public static boolean impar(int a){
-return !par(a); }
-//dosPares
-public static boolean dosPares2(int a, int b){ return par(a) && par(b);
-}
-public static boolean dosPares3(int a, int b, int c){ return par(a) && par(b) && impar(c) ||
-par(a) && impar(b) && par(c) ||
-      
-impar(a) && par(b) && par(c) ; }
-public static boolean dosPares4(int a, int b, int c, int d){ return dosPares3(a,b,c) && impar(d) ||
-dosPares3(a,c,d) && impar(b) || dosPares3(b,c,d) && impar(a) || dosPares3(a,b,d) && impar(c);
-}
-public static boolean dosPares5(int a, int b, int c, int d, int e){ return dosPares4(a,b,c,d) && impar(e) ||
-dosPares4(a,b,c,e) && impar(d) || dosPares4(a,b,d,e) && impar(c) || dosPares4(a,c,d,e) && impar(b) || dosPares4(b,c,d,e) && impar(a);
-}
-//tresPares
-public static boolean tresPares(int a, int b, int c){ return par(a) && par(b) && par(c);
-}
-public static boolean tresPares4(int a, int b, int c, int d){ return tresPares(a,b,c) && impar(d) ||
-tresPares(a,c,d) && impar(b) || tresPares(b,c,d) && impar(a) || tresPares(a,b,d) && impar(c);
-}
-public static boolean tresPares5(int a, int b, int c, int d, int e){
+public class Main {
 
-return tresPares4(a,b,c,d) && impar(e) || tresPares4(a,b,c,e) && impar(d) || tresPares4(a,b,d,e) && impar(c) || tresPares4(a,c,d,e) && impar(b) || tresPares4(b,c,d,e) && impar(a);
-}
-//existePar
-public static boolean existePar(int a, int b){
-return par(a) || par(b); }
-public static boolean existePar3(int a, int b, int c){ return par(a)|| par(b)|| par(c);
-}
-public static boolean existePar4(int a, int b, int c, int d){ return par(a)|| par(b)|| par(c) || par(d);
-}
-public static boolean existePar5(int a, int b, int c, int d, int e){ return par(a)|| par(b)|| par(c) || par(d) || par(e);
-}
-//existeImpar
-public static boolean existeImpar(int a, int b){ return impar(a) || impar(b);
-}
-
-public static boolean existeImpar3(int a, int b, int c){ return impar(a)|| impar(b)|| impar(c);
-}
-public static boolean existeImpar4(int a, int b, int c, int d){ return impar(a)|| impar(b)|| impar(c) || impar(d);
-}
-public static boolean existeImpar5(int a, int b, int c, int d, int e){ return impar(a)|| impar(b)|| impar(c) || impar(d) || impar(e); }
-//todosPares
-public static boolean todosPares(int a, int b){
-return par(a) && par(b); }
-public static boolean todosPares3(int a, int b, int c){ return par(a)&& par(b)&& par(c);
-}
-public static boolean todosPares4(int a, int b, int c, int d){ return par(a) && par(b) && par(c) && par(d);
-}
-public static boolean todosPares5(int a, int b, int c, int d, int e){ return par(a)&& par(b) && par(c) && par(d) && par(e);
-}
-//todosImpares
-
-public static boolean todosImpares(int a, int b){ return impar(a) && impar(b);
-}
-public static boolean todosImpares3(int a, int b, int c){ return impar(a) && impar(b)&& impar(c);
-}
-public static boolean todosImpares4(int a, int b, int c, int d){ return impar(a) && impar(b) && impar(c) && impar(d);
-}
-public static boolean todosImpares5(int a, int b, int c, int d, int e){ return impar(a) && impar(b) && impar(c) && impar(d) && impar(e); }
-//parImpar
-public static boolean parImpar(int a, int b){
-return existePar(a,b) && existeImpar(a,b); }
-public static boolean parImpar3(int a, int b, int c){ return existePar3(a,b,c) && existeImpar3(a,b,c);
-}
-public static boolean parImpar4(int a, int b, int c, int d){ return existePar4(a,b,c,d) && existeImpar4(a,b,c,d);
-}
-public static boolean parImpar5(int a, int b, int c, int d, int e){
-
-return existePar5(a,b,c,d,e) && existeImpar5(a,b,c,d,e); }
-//alterno
-public static boolean alterno(int a, int b){
-return par(a) && impar(b) || impar(a) && par(b); }
-public static boolean alterno3(int a, int b, int c){ return par(a) && par(b) && impar(c)||
-par(a) && impar(b) && par(c)||
-impar(a) && par(b) && par(c); }
-public static boolean alterno4(int a, int b, int c, int d){ return par(a) && par(b) && par(c) && impar(d)|| par(a) && par(b) && impar(c)&& par(d)||
-par(a) && impar(b) && par(c) && par(d)|| impar(a) && par(b) && par(c) && par(d);
-}
-public static boolean alterno5(int a, int b, int c, int d, int e){
-return par(a) && par(b) && par(c) && par(d) && impar(e)|| par(a) && par(b) && par(c)&& impar(d) && par(e)|| par(a) && par(b) && impar(c) && par(d) && par(e)|| par(a) && impar(b) && par(c) && par(d) && par(e)|| impar(a) && par(b) && par(c) && par(d) && par(e);
-}
-//iguales
-public static boolean iguales(int a, int b){
-return a == b; }
-
-public static boolean iguales3(int a, int b, int c){ return iguales(a,b) && iguales(a,c) && iguales(b,c);
-}
-public static boolean iguales4(int a, int b, int c, int d){
-return iguales3(a,b,c) && iguales3(a,b,d) && iguales3(a,c,d) && iguales3(b,c,d);
-}
-public static boolean iguales5(int a, int b, int c, int d, int e){
-return iguales4(a,b,c,d) && iguales4(a,b,c,e) && iguales4(a,b,d,e)&&
-iguales4(a,c,d,e) && iguales4(b,c,d,e); }
-//diferentes
-public static boolean diferentes(int a, int b){
-return a != b; }
-public static boolean diferentes3(int a, int b, int c){
-return diferentes(a,b) && diferentes(a,c) && diferentes(b,c);
-}
-public static boolean diferentes4(int a, int b, int c, int d){
-return diferentes3(a,b,c) && diferentes3(a,b,d) && diferentes3(a,c,d) && diferentes3(b,c,d);
-}
-public static boolean diferentes5(int a, int b, int c, int d, int e){
-return diferentes4(a,b,c,d) && diferentes4(a,b,c,e) && diferentes4(a,b,d,e)&&
-diferentes4(a,c,d,e) && diferentes4(b,c,d,e);
-
-} }
-public class LogicaSecuencias {
-
-
-
-
-
-import java.util.*;
-
-public class NumeroMedio{
     public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        int a=0,b=0,c=0;
-        
-        System.out.print("Ingresa A: ");
-        a= teclado.nextInt();
-        
-        System.out.print("Ingresa B: ");
-        b= teclado.nextInt();
-        
-        System.out.print("Ingresa C: ");
-        c= teclado.nextInt();
-        
-    if (a==b && b==c){
-    System.out.println("Todos los numeros son iguales");
+        System.out.println(menorAux3(5,1,4));
+        System.out.println(menorAux4(28,56,13,78));
+        System.out.println(mayorAux2(134,56));
+        System.out.println(mayorAux3(56,12,78));
+        System.out.println(mayorAux4(566,12,345,700));
+        System.out.println(existePar(67,88));
+        System.out.println(existeImpar(12,14,16));
+        System.out.println(secuenciaAsc(5,8,12));
+        System.out.println(secuenciaDesc(56,34,12));
+        System.out.println(dosPares(37,26,55));
     }
-    else if ((a>=b && a<=c) || (a<=b && a>=c)){
-        System.out.println("A es el numero medio");
+
+    public static int menorAux3(int a, int b, int c){
+        int menor = a;
+
+        if (b < menor){
+            menor = b;
+        }
+        if (c < menor){
+            menor = c;
+        }
+        return menor;
     }
-    else if
-        ((b>=a && b<=c) || (b<=a && b>=c)){
-            System.out.println("B es el numero medio");
-        }
-    else if
-        ((c>=a && c<=b) || (c<=a && c>=b)){
-            System.out.println("C es el numero medio");
-        }
-}
-}
 
-////////////
+    public static int menorAux4( int a, int b, int c, int d){
+        int menor = a;
 
-import java.util.*;
+        if (b < menor){
+            menor = b;
+        }
+        if (c < menor){
+            menor = c;
+        }
+        if (d < menor){
+            menor =d;
+        }
+        return menor;
+    }
 
-public class NumeroMedio{
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        int prom=0, nivel=0, matricula=1200;
-        float beca=0;
-    
-        System.out.print("Ingrese promedio: ");
-        prom=teclado.nextInt();
-    
-        System.out.print("Ingrese nivel: ");
-        nivel=teclado.nextInt();
-    
-        if(prom>=90 && nivel==1){
-            beca=matricula*0.80f;
+    public static int mayorAux2(int a, int b){
+        int mayor = a;
+
+        if (b > mayor){
+            mayor =b;
         }
-        else if(prom>=90 && nivel==2){
-            beca=matricula*0.60f;
+        return mayor;
+    }
+
+    public static int mayorAux3(int a, int b, int c){
+        int mayor = a;
+
+        if (b > mayor){
+            mayor = b;
         }
-        else if(prom>=80 && nivel==1){
-            beca=matricula*0.50f;
+        if (c > mayor){
+            mayor = c;
         }
-        else if(prom>=80 && nivel==2){
-            beca=matricula*0.30f;
+        return mayor;
+    }
+
+    public static int mayorAux4(int a, int b, int c, int d){
+        int mayor = a;
+
+        if (b > mayor){
+            mayor = b;
         }
-        else{
-            System.out.println("No hay beca");
-            return;
+        if (c > mayor){
+            mayor = c;
         }
-    
-        System.out.println("Pago matricula: " + beca + " Bs");
+        if (d > mayor){
+            mayor = d;
+        }
+        return mayor;
+    }
+
+    public static boolean existePar(int a, int b){
+        if (a % 2 == 0 || b % 2 == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static boolean existeImpar(int a, int b, int c){
+        if (a % 2 != 0 || b % 2 != 0 || c % 2 != 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static boolean secuenciaAsc(int a, int b, int c){
+        if (a < b && b < c){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static boolean secuenciaDesc(int a, int b, int c){
+        if (a > b && b > c){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static boolean dosPares(int a, int b, int c){
+        if ((a % 2 == 0 && b % 2 == 0) || (a % 2 == 0 && c % 2 == 0) || (b % 2 == 0 && c % 2 == 0)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }
