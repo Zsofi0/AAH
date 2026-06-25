@@ -1,0 +1,130 @@
+public class Main {
+
+    public static void main(String[] args){
+
+        System.out.println("Tabla 1");
+        tablan(5);
+        
+        System.out.println("Tabla 2");
+        tablank(5,12);
+        
+        System.out.println("Tabla 3");
+        tablaPares(10);
+        
+        System.out.println("Tabla 4");
+        tablaImpares(6);
+        
+        System.out.println("Tabla 5");
+        tablaIguales(4);
+    }
+
+    public static void tablan(int n){
+        for (int i=1; i<n; i++){
+            for (int j=1; j<n; j++){
+                System.out.println(i + "x" + j + "="+ (i*j));
+            }
+        }
+    }
+
+    public static void tablank(int n, int k){
+        for (int i=1; i<n; i++){
+            for (int j=1; j<k; j++){
+                if (i*j==k){
+                    System.out.println(i +"x"+j+"="+k);
+                }
+            }
+        }
+    }
+
+    public static void tablaPares(int n){
+        for (int i=1; i<n; i++){
+            for (int j=1; j<n; j++){
+                if (i%2==0 && j%2==0){
+                    System.out.println(i+"x"+j+"="+(i*j));
+                }
+            }
+        }
+    }
+
+    public static void tablaImpares(int n){
+        for (int i=1; i<n; i++){
+            for (int j=1; j<n; j++){
+                if (i%2==1 && j%2==1){
+                    System.out.println(i+"x" +j+"="+(i*j));
+                }
+            }
+        }
+    }
+
+    public static void tablaIguales (int n){
+        for (int i=1; i<n; i++){
+            System.out.println(i+"x"+i+"="+(i*i));
+        }
+    }
+}
+
+/////////////////////////////////////
+public class Main {
+
+    public static void main(String[] args) {
+
+        System.out.println("Divisores Ascendentes");
+        divisoresAsc(24);
+
+        System.out.println("Divisores Descendentes");
+        divisoresDesc(24);
+
+        System.out.println("Cantidad de Divisores");
+        System.out.println(cantDivisores(24));
+
+        System.out.println("Divisores Pares");
+        divisoresPares(24);
+
+        System.out.println("Divisores Impares");
+        divisoresImpares(24);
+    }
+
+    public static void divisoresAsc(int n){
+        for (int i=1; i<=n; i++){
+            if (n%i==0) {
+                System.out.println(i);
+            }
+        }
+    }
+
+    public static void divisoresDesc(int n){
+        for (int i=n; i>=1; i--){
+            if (n%i==0){
+                System.out.println(i);
+            }
+        }
+    }
+
+    public static int cantDivisores(int n){
+        int contador=0;
+
+        for (int i=1; i<=n; i++){
+            if (n%i== 0) {
+                contador++;
+            }
+        }
+
+        return contador;
+    }
+
+    public static void divisoresPares(int n){
+        for (int i=1; i<=n; i++){
+            if (n%i==0 && i%2==0){
+                System.out.println(i);
+            }
+        }
+    }
+
+    public static void divisoresImpares(int n) {
+        for (int i=1; i<=n;i++){
+            if (n%1==0 && i%2!=0){
+                System.out.println(i);
+            }
+        }
+    }
+}
